@@ -97,6 +97,42 @@ Access independent of a central server.
 Flexible branching and merging capabilities.
 Immediate access to project history locally.
 
+5. Installing Git in different OS
 
+Git can be installed on the most common operating systems like Windows, Mac, and Linux. In fact, Git comes installed by default on most Mac and Linux machines!
+Firstly, check for Git
+git --version
+
+1. Install Git on Windows
+Navigate to the latest Git for Windows installer and download the latest version.
+Once the installer has started, follow the instructions as provided in the Git Setup wizard screen until the installation is complete.
+Open the windows command prompt (or Git Bash if you selected not to use the standard Git Windows Command Prompt during the Git installation).
+Type git version to verify Git was installed.
+
+2. Install Git on Mac
+Most versions of MacOS will already have Git installed, and you can activate it through the terminal with git version. However, if you don't have Git installed for whatever reason, you can install the latest version of Git using one of several popular methods as listed below:
+Install Git From an Installer
+Navigate to the latest macOS Git Installer and download the latest version.
+Once the installer has started, follow the instructions as provided until the installation is complete.
+Open the command prompt "terminal" and type git version to verify Git was installed.
+Note: git-scm is a popular and recommended resource for downloading Git on a Mac. The advantage of downloading Git from git-scm is that your download automatically starts with the latest version of Git. The download source is the same macOS Git Installer as referenced in the steps above.
+Install Git from Homebrew
+Homebrew is a popular package manager for macOS. If you already have Homwbrew installed, you can follow the below steps to install Git:
+Open up a terminal window and install Git using the following command: brew install git.
+Once the command output has completed, you can verify the installation by typing: git version.
+
+3. Install Git on Linux
+Fun fact: Git was originally developed to version the Linux operating system! So, it only makes sense that it is easy to configure to run on Linux.
+
+You can install Git on Linux through the package management tool that comes with your distribution.
+Debian/Ubuntu
+Git packages are available using apt.
+It's a good idea to make sure you're running the latest version. To do so, Navigate to your command prompt shell and run the following command to make sure everything is up-to-date: sudo apt-get update.
+To install Git, run the following command: sudo apt-get install git-all.
+Once the command output has completed, you can verify the installation by typing: git version.
+Fedora
+Git packages are available using dnf.
+To install Git, navigate to your command prompt shell and run the following command: sudo dnf install git-all.
+Once the command output has completed, you can verify the installation by typing: git version.
 
 
