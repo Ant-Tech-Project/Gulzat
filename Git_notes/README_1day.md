@@ -81,8 +81,15 @@ Understanding these features and leveraging them effectively helps developers an
 Here is two articles which describe it more understandable:
 1. https://www.geeksforgeeks.org/centralized-vs-distributed-version-control-which-one-should-we-choose/
 2. https://chinmaya-sahoo.medium.com/what-is-version-control-centralized-vs-distributed-b91c84456e12
-
-<img width=300 src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20190820174942/CVCS-vs-DVCS.png">
+3. https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F#:~:text=The%20staging%20area%20is%20a,area%E2%80%9D%20works%20just%20as%20well.
+I added a very interesting difference between git and other VCS from the 3rd link:
+1. **Other VCS (Delta-based Version Control):**
+   - Traditional version control systems, like CVS or Subversion, typically store information as a set of changes or differences (deltas) between versions of files.
+   - Each change is recorded as a set of modifications made to individual files. Over time, these systems accumulate a history of changes, where each version is derived from the previous one by applying a series of modifications.
+2. **Git's Approach (Snapshot-based Version Control):**
+   - Git, on the other hand, thinks of its data more like a series of snapshots or snapshots of a mini filesystem.
+   - Every time you commit (save the state of your project), Git takes a complete snapshot of all your files at that moment and stores a reference to that snapshot. If files haven't changed since the last snapshot, Git doesn't store them again; it simply maintains a link to the previous identical files.
+   - Git's data model is focused on capturing the entire state of the project at each commit, rather than recording individual changes.
 
 Short version of differences!!!
 Centralized VCS:
@@ -135,4 +142,6 @@ Git packages are available using dnf.
 To install Git, navigate to your command prompt shell and run the following command: sudo dnf install git-all.
 Once the command output has completed, you can verify the installation by typing: git version.
 
+6. Basic commands for Git
 
+Here is a good article with good explanation for basic commands: https://medium.com/@vimalveeramani/list-of-all-git-commands-5fde9532279b
