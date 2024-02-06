@@ -274,3 +274,7 @@ Difference between git init and git clone:
 
 In short, `git init` is for starting a new repository, and `git clone` is for copying an existing repository.
 
+6. **What is a repository in Git?**
+    - A Git repository is a storage location for a project's files and version history. It contains a collection of directories and files, along with metadata stored in hidden subfolders, such as the `.git` directory.
+7. **What is the purpose of the Git staging area (index)?**
+    - The staging area, or index, is a space where changes are prepared for the next commit. It allows selective inclusion of changes, enabling developers to commit specific modifications while leaving others out.
