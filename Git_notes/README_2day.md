@@ -1,4 +1,16 @@
+1. Introduce the concept of remote repositories.
+Here is a good article for explaining it: https://medium.com/data-management-for-researchers/remote-repositories-part-1-remote-collaboration-e0fdc7d1ee48
+1. **What is a remote repository in Git?**
+    - A remote repository in Git is a version-controlled repository hosted on a remote server. It allows collaboration between developers by providing a centralized location to share and synchronize changes.
+2. **How do you add a remote repository?**
+    - To add a remote repository, use the command:
+    git remote add <remote-name> <remote-url>
+    This associates a remote name with a URL, enabling interactions with the remote repository.
+2. git commands: git clone, git push, git pull
 
+1. **`git clone`:**
+   - The `git clone` command is used to create a copy of a remote Git repository on your local machine. This command sets up a connection between your local repository and the remote repository, allowing you to fetch and push changes.
+   git clone https://github.com/example/repo.git
 
 2. **`git push`:**
    - The `git push` command is used to send your local changes to a remote repository. This updates the remote repository with your commits, making your changes available to other collaborators.
