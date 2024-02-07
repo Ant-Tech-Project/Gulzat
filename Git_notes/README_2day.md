@@ -119,3 +119,8 @@ Here is an article for deep learning of usage git rebase command: https://www.fr
         2. Use `git rebase <base>` to move commits to the specified base.
         3. Resolve conflicts if necessary.
         4. Continue with `git rebase --continue` until the process completes.
+
+### Additional Resources:
+
+- https://medium.com/mindorks/what-is-git-commit-push-pull-log-aliases-fetch-config-clone-56bc52a3601c
+- https://www.atlassian.com/git/tutorials/using-branches#:~:text=A%20branch%20represents%20an%20independent,staging%20area%2C%20and%20project%20history.
