@@ -1,5 +1,5 @@
 Explain the purpose of tags and how to create and manage them in Git: 
-Useful link: 
+Useful links: 
 1. https://www.atlassian.com/git/tutorials/inspecting-a-repository/git-tag
 2. https://git-scm.com/book/en/v2/Git-Basics-Tagging
 Git tags are a powerful feature for managing versions and releases of your software projects. Tags provide a stable reference point for specific commits in your Git history, making it easy to identify and work with specific codebase versions.
@@ -50,10 +50,6 @@ git checkout v1.0.0
 Tags are useful for marking releases, creating stable points in your project's history, and providing a clear reference to important versions. They also play a crucial role in managing versioning and release workflows.
 
 2. Concept of rebase and its usage
-
-Certainly! Here are step-by-step instructions for resolving conflicts using different Git commands:
-Here is link: https://git-scm.com/book/en/v2/Git-Branching-Rebasing
-
 Git Rebase:
 
 # Start a new branch (if not on one already)
