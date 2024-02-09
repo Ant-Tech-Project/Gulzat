@@ -1,4 +1,3 @@
-Cholpon I love  you. Good luck to you!!!
 What can a cause of conflict in Git?
 When working in Git, users can combine commits from two different branches through an action known as merging. Files are automatically merged unless there are conflicting sets of changes (i.e. the commits update the same line of code differently).
 A merge conflict is an event that occurs when Git is unable to automatically resolve differences in code between two commits.
