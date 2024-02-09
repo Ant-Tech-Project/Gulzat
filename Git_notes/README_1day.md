@@ -1,4 +1,4 @@
-1. Define Version Control
+#1. Define Version Control
 Short: "Version control is a system that tracks changes in software code. It helps multiple developers collaborate, keeps a history of changes, allows for easy branching and merging, and provides benefits like rollback, reproducibility, and automated testing for better code quality."
 Long: Version control, also known as source control or revision control, is a system and methodology used in software development to manage changes to the source code, documents, and other files associated with a project. The primary goal of version control is to track and coordinate modifications made by multiple contributors over time, enabling collaboration, maintaining a history of changes, and facilitating the management of different versions of a project.
 Key aspects of version control include:
