@@ -1,7 +1,7 @@
 1. Discuss security considerations in Git usage.
 Link: https://snyk.io/blog/ten-git-hub-security-best-practices/
 How to secure your github:
-1. Enable and enforce 2FA for GitHub
+1. Enable and enforce 2FA (Two-factor authentication) for GitHub
 2. Limit access to repositories
 3. Prevent storing credentials as code/config in GitHub
 4. Connect your repositories to Snyk and scan for vulnerabilities
