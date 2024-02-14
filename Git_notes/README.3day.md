@@ -2,6 +2,7 @@ Certainly! Here's a summary of the branching rules and workflows outlined in the
 
 ### **Branching Rules Summary:**
 
+
 The branching rules enforce a specific naming convention for branches within designated project groups. The regex rule `^(release\/v\d+(\.\d+)?|(feature|fix)\/[A-Z]{2,16}-\d+-.*)$` enforces the following:
 
 #### **Feature Branch (child):**
