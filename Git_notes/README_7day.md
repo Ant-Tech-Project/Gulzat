@@ -9,8 +9,8 @@ if [[ $name_of_branch == "master" ]]; then
 	echo Creating tag with version "$version"
 	git tag -a v$version -m "$version" 
  fi
-
-This could in fact be further automated (instead of typing the tag on the console you could read it from your Gradle file, or from an environmental variable where you store it. 
+password = 1111111 
+This could in fact be further automated (instead of typing the tag on the console you could read it from your Gradle file, or from an environmental variable where you store it). 
 
 Certainly! Let's dive into Git hooks as the last topic for Git.
 
