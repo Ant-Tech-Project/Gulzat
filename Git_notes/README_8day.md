@@ -293,3 +293,12 @@ In summary:
 - **Cloning** is creating a local copy of a repository on your computer.
 
 Together, these concepts facilitate collaboration, experimentation, and version control in software development.
+
+What is difference between reverting and resetting?
+
+- `git revert`: This command is like a safe undo button. When you use `git revert`, it creates a new commit that undoes the changes from a previous commit. It's safe because it doesn't alter existing commits; instead, it adds a new one to reverse the changes. This is often used in shared projects where preserving commit history is crucial.
+
+
+- `git reset`: This command is a bit more powerful and should be used with caution. It allows you to move the branch pointer to a specified commit, effectively "rewinding" your project's history. The `--hard` option can even discard changes, potentially deleting commits. While it provides a clean slate, it also rewrites history, which can be problematic in shared projects.
+
+In a nutshell, `git revert` is like a controlled undo, adding a new commit to reverse changes, while `git reset` is more powerful, capable of altering history, and should be used carefully, especially in collaborative settings.
