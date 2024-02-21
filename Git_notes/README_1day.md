@@ -182,21 +182,20 @@ Steps:
 Here are some key commands related to the staging area:
 - **`git add`:**
   - Adds changes from the working directory to the staging area. This can be specific files or all changes.
-  ```bash
+
   git add file.txt        # Stage a specific file
   git add .               # Stage all changes in the working directory
-  ```
+
 - **`git status`:**
   - Shows the status of your working directory, indicating which files are untracked, modified, or staged.
-  ```bash
+
   git status
-  ```
 - **`git reset`:**
   - Unstages changes from the staging area, allowing you to modify your staging selection.
-  ```bash
+
   git reset file.txt      # Unstage a specific file
   git reset               # Unstage all changes
-  ```
+
 
 Understanding and utilizing the staging area efficiently allows you to create well-organized, logical commits and maintain a clear history of your project. The staging area provides flexibility and control over what gets committed, enabling you to craft meaningful snapshots of your project's state.
 
@@ -253,10 +252,9 @@ Difference between git init and git clone:
    - It doesn't copy any files from an existing repository. It's typically used for starting a new project or converting an existing project into a Git repository.
 
    Example:
-   ```bash
+
    cd /path/to/your/project
    git init
-   ```
 
 2. **`git clone`:**
    - `git clone` is used to clone or copy an existing Git repository from a remote server to your local machine.
@@ -264,9 +262,8 @@ Difference between git init and git clone:
    - `git clone` also automatically sets up a remote tracking branch, usually named `origin`, pointing to the remote repository.
 
    Example:
-   ```bash
-   git clone https://github.com/example/repo.git
-   ```
+      git clone https://github.com/example/repo.git
+   
 
 **Summary:**
 - `git init` initializes a new Git repository in the current directory.

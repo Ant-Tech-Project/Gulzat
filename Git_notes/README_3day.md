@@ -1,6 +1,4 @@
-Certainly! Here's a summary of the branching rules and workflows outlined in the provided documentation:
-
-### **Branching Rules Summary:**
+Branching Rules Summary:
 
 The branching rules enforce a specific naming convention for branches within designated project groups. The regex rule `^(release\/v\d+(\.\d+)?|(feature|fix)\/[A-Z]{2,16}-\d+-.*)$` enforces the following:
 
@@ -40,11 +38,7 @@ The branching rules enforce a specific naming convention for branches within des
 - Strict workflows involve branching, development, squashing, rebasing, testing, and creating merge requests.
 - Naming conventions help maintain consistency and traceability.
 
-### **Diagrams:**
 - Diagrams illustrate branching structures and workflows for feature, hotfix, and release branches.
-
-
-Certainly! Here's a summarized version of the provided GitLab project configuration instructions:
 
 1. **Use Fast-Forward Merge Method:**
    - Go to Settings -> General -> Merge requests -> Merge method.
