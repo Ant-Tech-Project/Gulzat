@@ -119,3 +119,135 @@ In summary, service discovery is essential in various scenarios where applicatio
 
 how to expose application 
 how to connect two containers in different host
+
+Networking with overlay networks
+This series of tutorials deals with networking for swarm services. For networking with standalone containers, see Networking with standalone containers. If you need to learn more about Docker networking in general, see the overview.
+
+This page includes the following tutorials. You can run each of them on Linux, Windows, or a Mac, but for the last one, you need a second Docker host running elsewhere.
+
+Use the default overlay network demonstrates how to use the default overlay network that Docker sets up for you automatically when you initialize or join a swarm. This network is not the best choice for production systems.
+
+Use user-defined overlay networks shows how to create and use your own custom overlay networks, to connect services. This is recommended for services running in production.
+
+Use an overlay network for standalone containers shows how to communicate between standalone containers on different Docker daemons using an overlay network.
+
+Prerequisites
+These require you to have at least a single-node swarm, which means that you have started Docker and run docker swarm init on the host. You can run the examples on a multi-node swarm as well.
+
+Use the default overlay network
+In this example, you start an alpine service and examine the characteristics of the network from the point of view of the individual service containers.
+
+This tutorial does not go into operation-system-specific details about how overlay networks are implemented, but focuses on how the overlay functions from the point of view of a service.
+
+Prerequisites
+This tutorial requires three physical or virtual Docker hosts which can all communicate with one another. This tutorial assumes that the three hosts are running on the same network with no firewall involved.
+
+These hosts will be referred to as manager, worker-1, and worker-2. The manager host will function as both a manager and a worker, which means it can both run service tasks and manage the swarm. worker-1 and worker-2 will function as workers only,
+
+If you don't have three hosts handy, an easy solution is to set up three Ubuntu hosts on a cloud provider such as Amazon EC2, all on the same network with all communications allowed to all hosts on that network (using a mechanism such as EC2 security groups), and then to follow the installation instructions for Docker Engine - Community on Ubuntu.
+
+Walkthrough
+Create the swarm
+At the end of this procedure, all three Docker hosts will be joined to the swarm and will be connected together using an overlay network called ingress.
+
+On manager. initialize the swarm. If the host only has one network interface, the --advertise-addr flag is optional.
+
+
+ docker swarm init --advertise-addr=<IP-ADDRESS-OF-MANAGER>
+Make a note of the text that is printed, as this contains the token that you will use to join worker-1 and worker-2 to the swarm. It is a good idea to store the token in a password manager.
+
+On worker-1, join the swarm. If the host only has one network interface, the --advertise-addr flag is optional.
+
+
+ docker swarm join --token TOKEN \
+  --advertise-addr <IP-ADDRESS-OF-WORKER-1> \
+  <IP-ADDRESS-OF-MANAGER>:2377
+On worker-2, join the swarm. If the host only has one network interface, the --advertise-addr flag is optional.
+
+
+ docker swarm join --token TOKEN \
+  --advertise-addr <IP-ADDRESS-OF-WORKER-2> \
+  <IP-ADDRESS-OF-MANAGER>:2377
+On manager, list all the nodes. This command can only be done from a manager.
+
+
+ docker node ls
+
+ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS
+d68ace5iraw6whp7llvgjpu48 *   ip-172-31-34-146    Ready               Active              Leader
+nvp5rwavvb8lhdggo8fcf7plg     ip-172-31-35-151    Ready               Active
+ouvx2l7qfcxisoyms8mtkgahw     ip-172-31-36-89     Ready               Active
+You can also use the --filter flag to filter by role:
+
+
+ docker node ls --filter role=manager
+
+ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS
+d68ace5iraw6whp7llvgjpu48 *   ip-172-31-34-146    Ready               Active              Leader
+
+ docker node ls --filter role=worker
+
+ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS
+nvp5rwavvb8lhdggo8fcf7plg     ip-172-31-35-151    Ready               Active
+ouvx2l7qfcxisoyms8mtkgahw     ip-172-31-36-89     Ready               Active
+List the Docker networks on manager, worker-1, and worker-2 and notice that each of them now has an overlay network called ingress and a bridge network called docker_gwbridge. Only the listing for manager is shown here:
+
+
+ docker network ls
+
+NETWORK ID          NAME                DRIVER              SCOPE
+495c570066be        bridge              bridge              local
+961c6cae9945        docker_gwbridge     bridge              local
+ff35ceda3643        host                host                local
+trtnl4tqnc3n        ingress             overlay             swarm
+c8357deec9cb        none                null                local
+The docker_gwbridge connects the ingress network to the Docker host's network interface so that traffic can flow to and from swarm managers and workers. If you create swarm services and do not specify a network, they are connected to the ingress network. It is recommended that you use separate overlay networks for each application or group of applications which will work together. In the next procedure, you will create two overlay networks and connect a service to each of them.
+
+Create the services
+On manager, create a new overlay network called nginx-net:
+
+
+ docker network create -d overlay nginx-net
+You don't need to create the overlay network on the other nodes, because it will be automatically created when one of those nodes starts running a service task which requires it.
+
+On manager, create a 5-replica Nginx service connected to nginx-net. The service will publish port 80 to the outside world. All of the service task containers can communicate with each other without opening any ports.
+
+Note
+
+Services can only be created on a manager.
+
+
+ docker service create \
+  --name my-nginx \
+  --publish target=80,published=80 \
+  --replicas=5 \
+  --network nginx-net \
+  nginx
+The default publish mode of ingress, which is used when you do not specify a mode for the --publish flag, means that if you browse to port 80 on manager, worker-1, or worker-2, you will be connected to port 80 on one of the 5 service tasks, even if no tasks are currently running on the node you browse to. If you want to publish the port using host mode, you can add mode=host to the --publish output. However, you should also use --mode global instead of --replicas=5 in this case, since only one service task can bind a given port on a given node.
+
+Run docker service ls to monitor the progress of service bring-up, which may take a few seconds.
+
+Inspect the nginx-net network on manager, worker-1, and worker-2. Remember that you did not need to create it manually on worker-1 and worker-2 because Docker created it for you. The output will be long, but notice the Containers and Peers sections. Containers lists all service tasks (or standalone containers) connected to the overlay network from that host.
+
+From manager, inspect the service using docker service inspect my-nginx and notice the information about the ports and endpoints used by the service.
+
+Create a new network nginx-net-2, then update the service to use this network instead of nginx-net:
+
+
+ docker network create -d overlay nginx-net-2
+
+ docker service update \
+  --network-add nginx-net-2 \
+  --network-rm nginx-net \
+  my-nginx
+Run docker service ls to verify that the service has been updated and all tasks have been redeployed. Run docker network inspect nginx-net to verify that no containers are connected to it. Run the same command for nginx-net-2 and notice that all the service task containers are connected to it.
+
+Note
+
+Even though overlay networks are automatically created on swarm worker nodes as needed, they are not automatically removed.
+
+Clean up the service and the networks. From manager, run the following commands. The manager will direct the workers to remove the networks automatically.
+
+
+ docker service rm my-nginx
+ docker network rm nginx-net nginx-net-2
